@@ -3,10 +3,12 @@ Given('User access the site {string}') do |site|
 end
 
 When('User type {string} in the search field') do |querystring|
-  fill_in 'q', with: querystring
+  $querystring = querystring
+  fill_in 'q', with: "#{querystring}\n"
+  sleep 2
 end
 
 Then('User must see results related to the search') do
-  pending # Write code here that turns the phrase above into concrete actions
+  page.has_content?($querystring)
 end
 
